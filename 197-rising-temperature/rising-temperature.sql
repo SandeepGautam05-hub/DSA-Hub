@@ -1,4 +1,5 @@
 # Write your MySQL query statement below
+#Sandeep Gautam
 SELECT w1.id
 FROM Weather w1
 INNER JOIN Weather w2
