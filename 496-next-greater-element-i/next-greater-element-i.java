@@ -1,33 +1,45 @@
+import java.util.*;
+
 class Solution {
+
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
 
-        Stack<Integer> st = new Stack<>();
+        // Map to store:
+        // element -> next greater element
         HashMap<Integer, Integer> map = new HashMap<>();
 
-        for (int num : nums2) {
+        // Monotonic decreasing stack
+        Stack<Integer> stack = new Stack<>();
 
-            // Maintain decreasing monotonic stack
-            while (!st.isEmpty() && num > st.peek()) {
+        // Traverse nums2 from right to left
+        for (int i = nums2.length - 1; i >= 0; i--) {
 
-                int element = st.pop();
+            int current = nums2[i];
 
-                map.put(element, num);
+            // Remove elements smaller than or equal to current
+            while (!stack.isEmpty() && stack.peek() <= current) {
+                stack.pop();
             }
 
-            st.push(num);
+            // If stack is empty, no greater element exists
+            if (stack.isEmpty()) {
+                map.put(current, -1);
+            } 
+            else {
+                map.put(current, stack.peek());
+            }
+
+            // Add current element to stack
+            stack.push(current);
         }
 
-        // Remaining elements have no greater element
-        while (!st.isEmpty()) {
-            map.put(st.pop(), -1);
-        }
-
-        int[] ans = new int[nums1.length];
+        // Build answer for nums1
+        int[] result = new int[nums1.length];
 
         for (int i = 0; i < nums1.length; i++) {
-            ans[i] = map.get(nums1[i]);
+            result[i] = map.get(nums1[i]);
         }
 
-        return ans;
+        return result;
     }
 }
