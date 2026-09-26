@@ -9,7 +9,7 @@ class Solution {
         for(int i= (n*2)-1; i>=0; i--)
         {
             int current = nums[i%n];
-            while(!st.isEmpty() && st.peek()<=current   )
+            while(!st.isEmpty() && st.peek()<=current)
             {
                 st.pop();
             }
