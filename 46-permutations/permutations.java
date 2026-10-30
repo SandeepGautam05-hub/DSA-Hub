@@ -17,7 +17,12 @@ class Solution {
         {
             if(start==nums.length)
             {
-                ans.add(Arrays.stream(nums).boxed().collect(Collectors.toList()));
+                List<Integer> temp = new ArrayList<>();
+                for (int num : nums) 
+                {
+                    temp.add(num);
+                }
+                ans.add(temp);
                 return;
             }
 
